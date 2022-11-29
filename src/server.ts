@@ -10,10 +10,10 @@ const app = express();
 app.use(cors());
 
 router.get('/', (req, res) => {
-    res.json({
-        'hello': 'Hello world!',
-    })
-})
+  res.json({
+    hello: 'Hello world!',
+  });
+});
 
 app.use('/.netlify/functions/server', router);
 
