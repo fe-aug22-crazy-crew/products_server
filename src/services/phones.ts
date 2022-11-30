@@ -56,6 +56,8 @@ export const getByQueries = async(
     case 'cheapest':
       orderByQuery = ['fullPrice', 'ASC'];
       break;
+    default:
+      return Phone.findAll();
   }
 
   const params = {
