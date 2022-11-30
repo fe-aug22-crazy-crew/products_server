@@ -45,10 +45,10 @@ export const getByQueries = async(
 
   switch (query) {
     case 'newest':
-      orderByQuery = ['year', 'ASC'];
+      orderByQuery = ['year', 'DESC'];
       break;
     case 'oldest':
-      orderByQuery = ['year', 'DESC'];
+      orderByQuery = ['year', 'ASC'];
       break;
     case 'expensive':
       orderByQuery = ['fullPrice', 'DESC'];
