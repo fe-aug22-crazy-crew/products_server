@@ -33,3 +33,11 @@ export const remove = async(req: Request, res: Response) => {
   await phonesService.removePhone(+foundPhone);
   res.sendStatus(204);
 };
+
+export const getByQueries = async(req: Request, res: Response) => {
+  const searchParams = req.query;
+
+  if (!searchParams) {
+    res.send(await phonesService.getAll());
+  }
+};
