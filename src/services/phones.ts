@@ -41,8 +41,10 @@ export const removePhone = async(phoneId: number) => {
 export const getByQueries = async(
   query: string | string[] | QueryString.ParsedQs | QueryString.ParsedQs[],
   limit: number,
+  page: number,
 ) => {
   let orderByQuery;
+  const offset = limit * (page - 1);
 
   switch (query) {
     case 'newest':
@@ -58,14 +60,15 @@ export const getByQueries = async(
       orderByQuery = ['price', 'ASC'];
       break;
     default:
-      return Phone.findAll();
+      return Phone.findAndCountAll();
   }
 
   const params = {
     ...normalizePhone,
     order: [orderByQuery, ['id', 'ASC']],
     limit,
+    offset,
   };
 
-  return Phone.findAll(params);
+  return Phone.findAndCountAll(params);
 };
