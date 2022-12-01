@@ -11,6 +11,7 @@ export const getAll = async(req: Request, res: Response) => {
       res.sendStatus(404);
     }
 
+
     res.send(response);
   }
 

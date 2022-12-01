@@ -13,10 +13,6 @@ app.use(cors());
 
 app.use('/.netlify/functions/server', router);
 
-const staticPath = path.join(__dirname, 'src', 'public');
-
-router.use('/static', express.static(staticPath));
-
 router.get('/', (req, res) => {
   res.json({
     'fe-aug22-crazy-crew': 'Hello world!',

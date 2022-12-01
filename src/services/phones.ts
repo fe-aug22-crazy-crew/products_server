@@ -60,6 +60,7 @@ export const getByQueries = async(
       orderByQuery = ['price', 'ASC'];
       break;
     default:
+
       return Phone.findAndCountAll();
   }
 
