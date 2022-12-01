@@ -3,6 +3,7 @@ import cors from 'cors';
 import * as phoneController from './controllers/phones';
 import * as categoryController from './controllers/categories';
 import serverless from 'serverless-http';
+import path from 'path';
 
 const router = express.Router();
 

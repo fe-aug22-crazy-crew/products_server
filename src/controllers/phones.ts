@@ -2,10 +2,15 @@ import { Request, Response } from 'express';
 import * as phonesService from '../services/phones';
 
 export const getAll = async(req: Request, res: Response) => {
-  const { query, limit } = req.query;
+  const { qr, limit, pg } = req.query;
 
-  if (limit && query) {
-    const response = await phonesService.getByQueries(query, +limit);
+  if (limit && qr && pg) {
+    const response = await phonesService.getByQueries(qr, +limit, +pg);
+
+    if (response.count < +limit * (+pg - 1)) {
+      res.sendStatus(404);
+    }
+
 
     res.send(response);
   }
