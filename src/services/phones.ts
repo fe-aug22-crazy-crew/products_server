@@ -51,10 +51,10 @@ export const getByQueries = async(
       orderByQuery = ['year', 'ASC'];
       break;
     case 'expensive':
-      orderByQuery = ['fullPrice', 'DESC'];
+      orderByQuery = ['price', 'DESC'];
       break;
     case 'cheapest':
-      orderByQuery = ['fullPrice', 'ASC'];
+      orderByQuery = ['price', 'ASC'];
       break;
     default:
       return Phone.findAll();
