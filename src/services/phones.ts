@@ -5,6 +5,7 @@ import { Phone } from '../models/Phone';
 const normalizePhone = {
   attributes: [
     'id',
+    'itemId',
     'name',
     'fullPrice',
     'price',
