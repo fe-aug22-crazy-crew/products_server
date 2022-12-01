@@ -2,6 +2,14 @@ import { Request, Response } from 'express';
 import * as phonesService from '../services/phones';
 
 export const getAll = async(req: Request, res: Response) => {
+  const { query, limit } = req.query;
+
+  if (limit && query) {
+    const response = await phonesService.getByQueries(query, +limit);
+
+    res.send(response);
+  }
+
   const phones = await phonesService.getAll();
 
   res.send(phones);
