@@ -45,3 +45,11 @@ export const remove = async(req: Request, res: Response) => {
   await phonesService.removePhone(+foundPhone);
   res.sendStatus(204);
 };
+
+export const getNewPhones = async(req: Request, res: Response) => {
+  res.send(await phonesService.getNewPhones());
+};
+
+export const getByDiscount = async(req: Request, res: Response) => {
+  res.send(await phonesService.getByDiscount());
+};

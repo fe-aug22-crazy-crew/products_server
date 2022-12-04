@@ -24,6 +24,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/phones', phoneController.getAll);
+router.get('/phones/new', phoneController.getNewPhones);
+router.get('/phones/hot', phoneController.getByDiscount);
 router.get('/phones/:phoneId', phoneController.getOne);
 router.delete('phones/:phoneId', phoneController.remove);
 

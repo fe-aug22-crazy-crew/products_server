@@ -1,4 +1,5 @@
 import QueryString from 'qs';
+import { sequelize } from 'src/utils/db';
 import { Category } from '../models/Category';
 import { Phone } from '../models/Phone';
 
@@ -36,6 +37,45 @@ export const removePhone = async(phoneId: number) => {
       id: phoneId,
     },
   });
+};
+
+export const getNewPhones = async() => {
+  const params = {
+    ...normalizePhone,
+    order: [
+      ['year', 'DESC'],
+      ['id', 'ASC'],
+    ],
+    limit: 10,
+  };
+
+  return Phone.findAll(params);
+};
+
+export const getByDiscount = async() => {
+  const params = {
+    attributes: [
+      'id',
+      'itemId',
+      'name',
+      'fullPrice',
+      'price',
+      'screen',
+      'capacity',
+      'color',
+      'ram',
+      'year',
+      'image',
+      [sequelize.literal('(fullPrice - price'), 'discount'],
+    ],
+    order: [
+      ['discount', 'DESC'],
+      ['id', 'ASC'],
+    ],
+    limit: 10,
+  };
+
+  return Phone.findAll(params);
 };
 
 export const getByQueries = async(
