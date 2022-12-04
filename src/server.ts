@@ -20,6 +20,13 @@ router.use('/static', express.static(staticPath));
 router.get('/', (req, res) => {
   res.json({
     'fe-aug22-crazy-crew': 'Hello world!',
+    '/phones': 'Will return table with all phones.',
+    '/phones/new': 'return 10 newest phones. Phones are ordered by id',
+    '/phones/hot':
+      'return 10 phones with biggest discount. Phones are ordered by id',
+    '/phones/qr=QUERY&limit=NUMBER&pg=NUMBER':
+      // eslint-disable-next-line max-len
+      'QUERY should be one of following: newest, oldest, expensive, cheapest. limit = number of items per page. pg = number of page.',
   });
 });
 
