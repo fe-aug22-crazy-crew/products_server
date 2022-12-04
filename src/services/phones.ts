@@ -1,4 +1,5 @@
 import QueryString from 'qs';
+import { Sequelize } from 'sequelize';
 import { Category } from '../models/Category';
 import { Phone } from '../models/Phone';
 
@@ -38,6 +39,50 @@ export const removePhone = async(phoneId: number) => {
   });
 };
 
+
+export const getNewPhones = async() => {
+  const params = {
+    ...normalizePhone,
+    order: [
+      ['year', 'DESC'],
+      ['id', 'ASC'],
+    ],
+    limit: 10,
+  };
+
+  return Phone.findAll(params);
+};
+
+export const getByDiscount = async() => {
+  const params = {
+    attributes: [
+      'id',
+      'itemId',
+      'name',
+      'fullPrice',
+      'price',
+      'screen',
+      'capacity',
+      'color',
+      'ram',
+      'year',
+      'image',
+      [Sequelize.literal('full_price - price'), 'discount'],
+    ],
+    include: {
+      model: Category,
+      attributes: ['name'],
+    },
+    order: [
+      ['discount', 'DESC'],
+      ['id', 'ASC'],
+    ],
+    limit: 10,
+  };
+
+  return Phone.findAll(params);
+};
+
 export const getByQueries = async(
   query: string | string[] | QueryString.ParsedQs | QueryString.ParsedQs[],
   limit: number,
@@ -60,7 +105,6 @@ export const getByQueries = async(
       orderByQuery = ['price', 'ASC'];
       break;
     default:
-
       return Phone.findAndCountAll();
   }
 
