@@ -3,7 +3,6 @@ import cors from 'cors';
 import * as phoneController from './controllers/phones';
 import * as categoryController from './controllers/categories';
 import serverless from 'serverless-http';
-import path from 'path';
 
 const router = express.Router();
 
@@ -12,10 +11,6 @@ const app = express();
 app.use(cors());
 
 app.use('/.netlify/functions/server', router);
-
-const staticPath = path.join(__dirname, 'src', 'public');
-
-router.use('/static', express.static(staticPath));
 
 router.get('/', (req, res) => {
   res.json({
