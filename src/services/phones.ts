@@ -1,5 +1,5 @@
 import QueryString from 'qs';
-import { sequelize } from 'src/utils/db';
+import { Sequelize } from 'sequelize';
 import { Category } from '../models/Category';
 import { Phone } from '../models/Phone';
 
@@ -66,8 +66,12 @@ export const getByDiscount = async() => {
       'ram',
       'year',
       'image',
-      [sequelize.literal('(fullPrice - price'), 'discount'],
+      [Sequelize.literal('full_price - price'), 'discount'],
     ],
+    include: {
+      model: Category,
+      attributes: ['name'],
+    },
     order: [
       ['discount', 'DESC'],
       ['id', 'ASC'],
