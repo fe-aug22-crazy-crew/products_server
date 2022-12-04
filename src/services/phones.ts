@@ -39,7 +39,6 @@ export const removePhone = async(phoneId: number) => {
   });
 };
 
-
 export const getNewPhones = async() => {
   const params = {
     ...normalizePhone,
