@@ -12,6 +12,8 @@ export const getAll = async(req: Request, res: Response) => {
     }
 
     res.send(response);
+
+    return;
   }
 
   const phones = await phonesService.getAll();
