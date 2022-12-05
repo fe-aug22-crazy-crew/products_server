@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import * as phoneController from './controllers/phones';
 import * as categoryController from './controllers/categories';
+import * as tabletController from './controllers/tablets';
+import * as accessoriesController from './controllers/accessories';
 import serverless from 'serverless-http';
 
 const router = express.Router();
@@ -32,6 +34,9 @@ router.get('/phones/hot', phoneController.getByDiscount);
 
 router.get('/phones/:phoneId', phoneController.getOne);
 router.delete('phones/:phoneId', phoneController.remove);
+
+router.get('/tablets', tabletController.getAll);
+router.get('/accessories', accessoriesController.getAll);
 
 router.get('/categories', categoryController.getAll);
 router.get('/categories/:categoryId', categoryController.getOne);
