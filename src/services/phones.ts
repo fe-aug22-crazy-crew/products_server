@@ -1,5 +1,6 @@
 import QueryString from 'qs';
 import { Sequelize } from 'sequelize';
+import { PhoneInfo } from '../models/PhoneInfo';
 import { Category } from '../models/Category';
 import { Phone } from '../models/Phone';
 
@@ -115,4 +116,8 @@ export const getByQueries = async(
   };
 
   return Phone.findAndCountAll(params);
+};
+
+export const getPhoneInfoById = async(phoneId: string) => {
+  return PhoneInfo.findByPk(phoneId);
 };
