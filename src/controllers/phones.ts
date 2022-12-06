@@ -23,7 +23,13 @@ export const getAll = async(req: Request, res: Response) => {
 
 export const getOne = async(req: Request, res: Response) => {
   const { phoneId } = req.params;
-  const foundPhone = await phonesService.getPhoneById(+phoneId);
+  let foundPhone;
+
+  if (isNaN(+phoneId)) {
+    foundPhone = await phonesService.getPhoneInfoById(phoneId);
+  } else {
+    foundPhone = await phonesService.getPhoneById(+phoneId);
+  }
 
   if (!phoneId) {
     res.sendStatus(404);
