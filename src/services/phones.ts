@@ -56,22 +56,11 @@ export const getNewPhones = async() => {
 export const getByDiscount = async() => {
   const params = {
     attributes: [
-      'id',
-      'itemId',
-      'name',
-      'fullPrice',
-      'price',
-      'screen',
-      'capacity',
-      'color',
-      'ram',
-      'year',
-      'image',
+      ...normalizePhone.attributes,
       [Sequelize.literal('full_price - price'), 'discount'],
     ],
     include: {
-      model: Category,
-      attributes: ['name'],
+      ...normalizePhone.include,
     },
     order: [
       ['discount', 'DESC'],
@@ -119,5 +108,11 @@ export const getByQueries = async(
 };
 
 export const getPhoneInfoById = async(phoneId: string) => {
-  return PhoneInfo.findByPk(phoneId);
+  const params = {
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
+  };
+
+  return PhoneInfo.findByPk(phoneId, params);
 };
