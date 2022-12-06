@@ -65,16 +65,16 @@ export const PhoneInfo = sequelize.define(
         return this.setDataValue('images', JSON.stringify(val));
       },
     },
-    // description: {
-    //   field: 'description',
-    //   type: DataTypes.STRING,
-    //     get: function() {
-    //         return JSON.parse(this.getDataValue('description'));
-    //     },
-    //     set: function(val) {
-    //         return this.setDataValue('description', JSON.stringify(val));
-    //     },
-    // },
+    description: {
+      field: 'description',
+      type: DataTypes.TEXT,
+      get: function() {
+        return JSON.parse(this.getDataValue('description'));
+      },
+      set: function(val) {
+        return this.setDataValue('description', JSON.stringify(val));
+      },
+    },
     screen: {
       field: 'screen',
       type: DataTypes.STRING,
