@@ -2,7 +2,7 @@ import { sequelize } from '../utils/db';
 import { DataTypes } from 'sequelize';
 
 export const PhoneInfo = sequelize.define(
-  'full_phone',
+  'phone_info',
   {
     id: {
       field: 'id',

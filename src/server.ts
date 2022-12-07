@@ -35,6 +35,8 @@ router.get('/phones/hot', phoneController.getByDiscount);
 router.get('/phones/:phoneId', phoneController.getOne);
 router.delete('phones/:phoneId', phoneController.remove);
 
+router.get('/phones/:phoneId/recommended', phoneController.getRecommendedById);
+
 router.get('/tablets', tabletController.getAll);
 router.get('/accessories', accessoriesController.getAll);
 
