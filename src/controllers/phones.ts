@@ -31,7 +31,7 @@ export const getOne = async(req: Request, res: Response) => {
     foundPhone = await phonesService.getPhoneById(+phoneId);
   }
 
-  if (!phoneId) {
+  if (!phoneId || !foundPhone) {
     res.sendStatus(404);
 
     return;
