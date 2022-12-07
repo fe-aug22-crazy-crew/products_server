@@ -1,5 +1,5 @@
 import QueryString from 'qs';
-import { Sequelize } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 import { PhoneInfo } from '../models/PhoneInfo';
 import { Category } from '../models/Category';
 import { Phone } from '../models/Phone';
@@ -115,4 +115,22 @@ export const getPhoneInfoById = async(phoneId: string) => {
   };
 
   return PhoneInfo.findByPk(phoneId, params);
+};
+
+export const getRecommendedByPrice = async(price: number, itemId: string) => {
+  return Phone.findAll({
+    attributes: [...normalizePhone.attributes],
+    include: {
+      ...normalizePhone.include,
+    },
+    where: {
+      price: {
+        [Op.gte]: price - 100,
+      },
+      itemId: {
+        [Op.not]: itemId,
+      },
+    },
+    limit: 10,
+  });
 };

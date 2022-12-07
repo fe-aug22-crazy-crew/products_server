@@ -61,3 +61,29 @@ export const getNewPhones = async(req: Request, res: Response) => {
 export const getByDiscount = async(req: Request, res: Response) => {
   res.send(await phonesService.getByDiscount());
 };
+
+export const getRecommendedById = async(req: Request, res: Response) => {
+  const { phoneId } = req.params;
+  let foundPhone;
+
+  if (isNaN(+phoneId)) {
+    foundPhone = await phonesService.getPhoneInfoById(phoneId);
+  } else {
+    foundPhone = await phonesService.getPhoneById(+phoneId);
+  }
+
+  if (!phoneId || !foundPhone) {
+    res.sendStatus(404);
+
+    return;
+  }
+
+  const price = foundPhone.getDataValue('priceDiscount');
+  const id = foundPhone.getDataValue('id');
+  const recommendedPhones = await phonesService.getRecommendedByPrice(
+    price,
+    id,
+  );
+
+  res.send(recommendedPhones);
+};
